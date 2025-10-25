@@ -28,7 +28,7 @@ Below is a visual overview of key projects and skills.
 
 ### 🔹 Sales Metrics Comparison
 **Badges:** `SQL`, `Data Analytics`  
-**Description:** Comparing tables (`sales_metrics`, `inventory_data`, `KPI_data`) by orders, brands, and periods.  
+**Description:** Comparing tables (`sales_metrics`, `inventory_data`, `product_data`,`KPI_data`) by orders, brands, and periods.  
 **Skills Highlighted:** SQL, Data Aggregation, Metric Comparison  
 
 ---
@@ -82,7 +82,7 @@ Dieser Ordner enthält Projekte und Skripte, die meine Erfahrungen mit **Python,
 
 ### 🔹 Vergleich von Vertriebskennzahlen
 **Badges:** `SQL`, `Datenanalyse`  
-**Beschreibung:** Vergleichen von Tabellen (`sales_metrics`, `inventory_data`, `KPI_data`) nach Bestellungen, Marken und Zeiträumen.  
+**Beschreibung:** Vergleichen von Tabellen (`sales_metrics`, `inventory_data`, `product_data`, `KPI_data`) nach Bestellungen, Marken und Zeiträumen.  
 **Skills Highlighted:** SQL, Datenaggregation, Metrikvergleich  
 
 ---
