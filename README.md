@@ -1,60 +1,114 @@
-# Python Portfolio
-**ENG**
+# 🐍 Python Portfolio
 
-This folder contains projects and scripts showcasing my experience in Python, data analytics, and data processing.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Data](https://img.shields.io/badge/Data-Analytics-green)
+![BigData](https://img.shields.io/badge/BigData-PySpark-orange)
 
-**Key Skills and Areas:**
+---
 
-Data Analysis & SQL: working with databases, metric comparison, data aggregation, complex SQL queries for analytics and reporting.
+## 📄 ENG: Overview
+This folder contains projects and scripts showcasing my experience in **Python, data analytics, and data processing**.  
+Below is a visual overview of key projects and skills.
 
-PySpark & Big Data: processing and transforming large tables, calculating percentage changes, grouping and filtering data.
+---
 
-Excel Reporting: generating complex reports with formatting, merging data, and performing calculations.
+## ✨ Key Skills
+| Area | Description |
+|------|------------|
+|🗄 Data Analysis & SQL | Databases, metric comparison, data aggregation, complex SQL queries |
+|⚡ PySpark & Big Data | Large table processing, percentage change calculations, grouping/filtering |
+|📑 Excel Reporting | Generating complex reports, merging data, formatting |
+|🛠 Data Processing | Merging tables, filtering, date handling, KPI calculations |
+|🤖 Automation & Scripting | Automating routine tasks, working with APIs and files |
+|📊 Additional Experience | JIRA data analysis, visualizing brands, categories, MPNs, SKUs |
 
-Data Processing: merging tables, filtering, working with dates, calculating KPIs, handling text and numeric data.
+---
 
-Automation & Scripting: automating routine tasks, working with APIs and files.
+## 🏗 Example Projects
 
-Additional Experience: working with JIRA data, visualizing changes, analyzing brands, categories, MPNs, and SKUs.
+### 🔹 Sales Metrics Comparison
+**Badges:** `SQL`, `Data Analytics`  
+**Description:** Comparing tables (`sales_metrics`, `inventory_data`, `KPI_data`) by orders, brands, and periods.  
+**Skills Highlighted:** SQL, Data Aggregation, Metric Comparison  
 
-**Example Projects and Scripts:**
+---
 
-Sales Metrics Comparison: comparing tables (sales_metrics, sales_metrics_ns) by orders, brands, and periods.
+### 🔹 Inventory Change Reports
+**Badges:** `Python`, `PySpark`, `Excel`  
+**Description:** Calculating percentage changes in price, cost, and inventory between current and previous data.  
+**Skills Highlighted:** PySpark, Excel Reporting, Data Processing  
 
-Inventory Change Reports: calculating percentage changes in price, cost, and inventory between current and previous data.
+---
 
-Salary Report Generation: combining task, epic, and subtask data with properly formatted Excel reports.
+### 🔹 Salary Report Generation
+**Badges:** `Python`, `Excel`, `Automation`  
+**Description:** Combining task, epic, and subtask data with properly formatted Excel reports.  
+**Skills Highlighted:** Excel Formatting, Automation, Data Merging  
 
-Significant Changes Analysis: counting and visualizing cost and price changes for brands and suppliers’ MPNs.
+---
 
-**Date and Range Handling:** filtering data for the last hour, YTD, last 30 days, monthly custom ranges, and formatting for Excel.
+### 🔹 Significant Changes Analysis
+**Badges:** `Python`, `Data Visualization`  
+**Description:** Counting and visualizing cost and price changes for brands and suppliers’ MPNs.  
+**Skills Highlighted:** Data Processing, Visualization, KPI Analysis  
 
-**DE**
+---
 
-Dieser Ordner enthält Projekte und Skripte, die meine Erfahrungen mit Python, Datenanalyse und Datenverarbeitung veranschaulichen.
+### 🔹 Date and Range Handling
+**Badges:** `Python`, `SQL`, `Automation`  
+**Description:** Filtering data for the last hour, YTD, last 30 days, monthly custom ranges, and formatting for Excel.  
+**Skills Highlighted:** Date Handling, SQL Queries, Excel Formatting  
 
-**Schlüsselkompetenzen und Fachgebiete:**
+---
 
-Datenanalyse & SQL: Arbeit mit Datenbanken, Metrikvergleich, Datenaggregation, komplexe SQL-Abfragen für Analysen und Berichte.
+## 📄 DE: Übersicht
+Dieser Ordner enthält Projekte und Skripte, die meine Erfahrungen mit **Python, Datenanalyse und Datenverarbeitung** veranschaulichen.  
 
-PySpark & Big Data: Verarbeitung und Transformation großer Tabellen, Berechnung prozentualer Veränderungen, Gruppierung und Filterung von Daten.
+---
 
-Excel-Berichterstellung: Erstellung komplexer Berichte mit Formatierung, Zusammenführung von Daten und Durchführung von Berechnungen.
+## ✨ Schlüsselkompetenzen
+| Bereich | Beschreibung |
+|---------|--------------|
+|🗄 Datenanalyse & SQL | Datenbanken, Metrikvergleich, Datenaggregation, komplexe SQL-Abfragen |
+|⚡ PySpark & Big Data | Verarbeitung großer Tabellen, Berechnung prozentualer Veränderungen, Gruppierung/Filterung |
+|📑 Excel-Berichterstellung | Erstellung komplexer Berichte, Datenzusammenführung, Formatierung |
+|🛠 Datenverarbeitung | Tabellen zusammenführen, filtern, Datumsverarbeitung, KPI-Berechnung |
+|🤖 Automatisierung & Skripting | Routineaufgaben automatisieren, Arbeiten mit APIs und Dateien |
+|📊 Zusätzliche Erfahrung | JIRA-Datenanalyse, Visualisierung von Marken, Kategorien, MPNs, SKUs |
 
-Datenverarbeitung: Zusammenführen von Tabellen, Filtern, Arbeiten mit Datumsangaben, Berechnen von KPIs, Bearbeiten von Text- und numerischen Daten.
+---
 
-Automatisierung und Skripting: Automatisieren von Routineaufgaben, Arbeiten mit APIs und Dateien.
+## 🏗 Beispielprojekte
 
-Zusätzliche Erfahrungen: Arbeiten mit JIRA-Daten, Visualisieren von Änderungen, Analysieren von Marken, Kategorien, MPNs und SKUs.
+### 🔹 Vergleich von Vertriebskennzahlen
+**Badges:** `SQL`, `Datenanalyse`  
+**Beschreibung:** Vergleichen von Tabellen (`sales_metrics`, `inventory_data`, `KPI_data`) nach Bestellungen, Marken und Zeiträumen.  
+**Skills Highlighted:** SQL, Datenaggregation, Metrikvergleich  
 
-**Beispielprojekte und Skripte:**
+---
 
-Vergleich von Vertriebskennzahlen: Vergleichen von Tabellen (sales_metrics, sales_metrics_ns) nach Bestellungen, Marken und Zeiträumen.
+### 🔹 Berichte zu Bestandsänderungen
+**Badges:** `Python`, `PySpark`, `Excel`  
+**Beschreibung:** Berechnung prozentualer Veränderungen bei Preis, Kosten und Bestand zwischen aktuellen und früheren Daten.  
+**Skills Highlighted:** PySpark, Excel-Berichte, Datenverarbeitung  
 
-Berichte zu Bestandsänderungen: Berechnen prozentualer Veränderungen bei Preis, Kosten und Bestand zwischen aktuellen und früheren Daten.
+---
 
-Erstellen von Gehaltsberichten: Kombinieren von Aufgaben-, Epic- und Unteraufgabendaten mit korrekt formatierten Excel-Berichten.
+### 🔹 Erstellen von Gehaltsberichten
+**Badges:** `Python`, `Excel`, `Automatisierung`  
+**Beschreibung:** Kombination von Aufgaben-, Epic- und Unteraufgabendaten mit korrekt formatierten Excel-Berichten.  
+**Skills Highlighted:** Excel-Formatierung, Automatisierung, Datenzusammenführung  
 
-Analyse signifikanter Änderungen: Zählen und Visualisieren von Kosten- und Preisänderungen für Marken und MPNs von Lieferanten.
+---
 
-**Umgang mit Daten und Zeiträumen:** Filtern von Daten für die letzte Stunde, das laufende Jahr, die letzten 30 Tage, benutzerdefinierte Monatszeiträume und Formatieren für Excel.
+### 🔹 Analyse signifikanter Änderungen
+**Badges:** `Python`, `Datenvisualisierung`  
+**Beschreibung:** Zählen und Visualisieren von Kosten- und Preisänderungen für Marken und MPNs von Lieferanten.  
+**Skills Highlighted:** Datenverarbeitung, Visualisierung, KPI-Analyse  
+
+---
+
+### 🔹 Umgang mit Daten und Zeiträumen
+**Badges:** `Python`, `SQL`, `Automatisierung`  
+**Beschreibung:** Filtern von Daten für die letzte Stunde, das laufende Jahr, die letzten 30 Tage, benutzerdefinierte Monatszeiträume und Formatieren für Excel.  
+**Skills Highlighted:** Datumsverarbeitung, SQL-Abfragen, Excel-Formatierung
