@@ -1,282 +1,273 @@
-Sales Reports Automation
+📊 Contact Center Reports Automation
 
+---
 
+## 📄 ENG: Overview
 
-This repository contains a Python-based solution for generating and sending automated hourly, monthly, and yearly sales reports via email using Databricks, Pandas, and Microsoft Graph API. The solution supports multiple regions (US, EU, UA) and provides both agent-level and team-level leaderboards.
+Automates hourly, monthly, and yearly sales reports via email using Databricks, Pandas, and Microsoft Graph API.
+Supports US, EU, and UA regions, with agent-level and team-level leaderboards.
 
+---
 
+## ✨ Features
 
-Features
+⏰ Hourly, Monthly (MTD), and Yearly (YTD) reports
 
+👥 Agent-level and team-level summaries
 
+📈 Automatic calculations for:
 
-Hourly, Monthly (MTD), and Yearly (YTD) reports
+  - Orders
 
+  - Gross Revenue
 
+  - Interactions
 
-Agent-level and team-level summaries
+  - Conversion rate (%)
 
+  - Average Order Value (AOV)
 
+📊 Excel attachment generation via XlsxWriter
 
-Automatic calculation of:
+💌 HTML email with styled tables
 
+📬 Sending emails via Microsoft Graph API
 
+✅ Supports filtering by team
 
-Orders
+🏆 Includes team totals and grand totals
 
+---
 
-
-Gross Revenue
-
-
-
-Interactions
-
-
-
-Conversion rate
-
-
-
-Average Order Value (AOV)
-
-
-
-Excel attachment generation using XlsxWriter
-
-
-
-HTML email body with styled tables
-
-
-
-Sending emails via Microsoft Graph API using a shared mailbox
-
-
-
-Supports filtering by team
-
-
-
-Grand totals and team totals included in reports
-
-
-
-Repository Structure
-
-.
-
-├── README.md                  # This file
-
-├── sales\_report.py            # Main script for generating and sending reports
-
-├── requirements.txt           # Python dependencies
-
-├── sql\_queries/               # Folder with SQL queries used in Databricks
-
-│   ├── hourly.sql
-
-│   ├── monthly\_mtd.sql
-
-│   └── yearly\_ytd.sql
-
-├── templates/                 # HTML templates for email formatting
-
-│   └── email\_template.html
-
-└── secrets\_config.md          # Instructions for storing secrets in Databricks
-
-
-
-Prerequisites
-
-
+## ⚙️ Prerequisites
 
 Python 3.8+
 
-
-
 Databricks environment with Spark
-
-
 
 Microsoft 365 account with a shared mailbox
 
-
-
 Access to Databricks Secret Scope for storing credentials
 
+---
 
-
-Python Dependencies
-
+## 📦 Python Dependencies
 pip install pandas requests xlsxwriter
 
+---
 
+## 🛠️ Setup
 
-Setup
+1. Store secrets in Databricks Secret Scope:
 
+|🔑 Secret Key	|📝 Description|
+|------------|---------|
+|client_id|	OAuth2 client ID|
+|client_secret|	OAuth2 client secret|
+|tenant_id|	Microsoft tenant ID|
+|mailbox|	Shared mailbox email address|
 
+2. Set up SQL queries to fetch sales data:
 
-Store secrets in Databricks Secret Scope:
+  - Hourly: cc_report_current_day_hourly
 
+  - Monthly (MTD): cc_report_current_month_hourly
 
+  - Yearly (YTD): cc_report_current_Year_hourly
 
-Secret Key	Description
+3. Update region-specific tables for email content:
 
-client\_id	OAuth2 client ID
+  - US: US_html_tables
 
-client\_secret	OAuth2 client secret
+  - EU: EU_html_tables
 
-tenant\_id	Microsoft tenant ID
+  - UA: UA_html_tables
 
-mailbox	Shared mailbox email address
+---
 
+## 🚀 How It Works
 
+🖥️ Fetch data from Databricks SQL tables
 
-Define SQL queries to fetch sales data:
+🔄 Convert Spark DataFrame → Pandas
 
+#🧮 Calculate totals:
 
+ - Agent totals
 
-Hourly: cc\_report\_current\_day\_hourly
+ - Team totals
 
+ - Grand totals
 
+📊 Generate Excel attachments using Pandas/XlsxWriter
 
-Monthly (MTD): cc\_report\_current\_month\_hourly
+✉️ Prepare HTML email with tables and styling
 
+📬 Send emails via Microsoft Graph API based on team/region
 
+---
 
-Yearly (YTD): cc\_report\_current\_Year\_hourly
-
-
-
-Update region-specific tables for email content:
-
-
-
-US: US\_html\_tables
-
-
-
-EU: EU\_html\_tables
-
-
-
-UA: UA\_html\_tables
-
-
-
-How It Works
-
-
-
-Fetch data from Databricks SQL tables using Spark SQL.
-
-
-
-Convert Spark DataFrames to Pandas for processing.
-
-
-
-Calculate totals:
-
-
-
-Agent totals
-
-
-
-Team totals
-
-
-
-Grand totals
-
-
-
-Generate Excel attachments with Pandas and XlsxWriter.
-
-
-
-Prepare HTML email with inline tables and styling.
-
-
-
-Send emails via Microsoft Graph API to team members based on their region.
-
-
-
-Example Usage
-
-\# Send US Sales Email
-
-send\_email('US', "Hourly Report (US Sales)", US\_html\_tables)
-
-
-
-\# Send EU Sales Email
-
-send\_email('EU', "Hourly Report (EU Sales)", EU\_html\_tables)
-
-
-
-\# Send UA Sales Email
-
-send\_email('UA', "Hourly Report (UA Sales)", UA\_html\_tables)
-
-
-
-Email Format
-
-
+## 📧 Email Format
 
 Each email contains:
 
+🏆 Current day leaderboard
 
+👥 Current day by teams
 
-Current day leaderboard
+📅 Month-to-date leaderboard
 
+🗂️ Month-to-date by teams
 
+📊 Year-to-date leaderboard
 
-Current day by teams
+📌 Year-to-date by teams
 
+Tables include borders, centered text, and highlighted headers for readability.
 
+---
 
-Month-to-date leaderboard
+## ⏰ Notes
 
+Email timestamps are UTC-4, rounded to the nearest hour
 
+Make sure all secrets and email recipients are properly configured
 
-Month-to-date by teams
+Script uses a shared mailbox with To and CC recipients
 
+---
 
+## 📄 DE Übersicht
 
-Year-to-date leaderboard
+Automatisiert stündliche, monatliche und jährliche Verkaufsberichte per E-Mail mithilfe von Databricks, Pandas und Microsoft Graph API.
+Unterstützt Regionen in den USA, der EU und der Ukraine mit Ranglisten auf Agenten- und Teamebene.
 
+---
 
+## ✨ Funktionen
 
-Year-to-date by teams
+⏰ Stündliche, monatliche (MTD) und jährliche (YTD) Berichte
 
+👥 Zusammenfassungen auf Agenten- und Teamebene
 
+📈 Automatische Berechnungen für:
 
-All tables are formatted with borders, centered text, and alternating headers for readability.
+  - Bestellungen
 
+  - Bruttoumsatz
 
+  - Interaktionen
 
-Notes
+  - Konversionsrate (%)
 
+  - Durchschnittlicher Bestellwert (AOV)
 
+📊 Erstellung von Excel-Anhängen über XlsxWriter
 
-Timestamps in the email are in UTC-4 timezone, rounded to the hour.
+💌 HTML-E-Mail mit formatierten Tabellen
 
+📬 Versand von E-Mails über Microsoft Graph API
 
+✅ Unterstützt Filterung nach Team
 
-Make sure all secret keys and email recipients are correctly configured.
+🏆 Enthält Team-Gesamtwerte und Gesamtwerte
 
+---
 
+## ⚙️ Voraussetzungen
 
-The script uses a shared mailbox to send emails to multiple recipients with To and CC fields.
+Python 3.8+
 
+Databricks-Umgebung mit Spark
 
+Microsoft 365-Konto mit gemeinsam genutztem Postfach
 
+Zugriff auf Databricks Secret Scope zum Speichern von Anmeldedaten
 
+---
 
+## 📦 Python-Abhängigkeiten
+pip install pandas requests xlsxwriter
+
+---
+
+## 🛠️ Einrichtung
+
+1. Speichern Sie Geheimnisse in Databricks Secret Scope:
+
+|🔑 Geheimschlüssel    |📝 Beschreibung|
+|------------|---------|
+|client_id|	OAuth2-Client-ID|
+|client_secret|    OAuth2-Client-Geheimnis|
+|tenant_id|    Microsoft-Mandanten-ID|
+|mailbox|    E-Mail-Adresse des gemeinsamen Postfachs|
+
+2. Richten Sie SQL-Abfragen zum Abrufen von Verkaufsdaten ein:
+
+  - Stündlich: cc_report_current_day_hourly
+
+  - Monatlich (MTD): cc_report_current_month_hourly
+
+  - Jährlich (YTD): cc_report_current_Year_hourly
+
+3. Aktualisieren Sie regionsspezifische Tabellen für E-Mail-Inhalte:
+
+  - USA: US_html_tables
+
+  - EU: EU_html_tables
+
+  - UA: UA_html_tables
+
+Übersetzt mit DeepL.com (kostenlose Version)
+
+---
+
+## 🚀 So funktioniert es
+
+🖥️ Daten aus Databricks-SQL-Tabellen abrufen
+
+🔄 Spark DataFrame → Pandas konvertieren
+
+#🧮 Summen berechnen:
+
+ - Agentensummen
+
+ - Teamsummen
+
+ - Gesamtsummen
+
+📊 Excel-Anhänge mit Pandas/XlsxWriter generieren
+
+✉️ HTML-E-Mail mit Tabellen und Formatierung vorbereiten
+
+📬 E-Mails über Microsoft Graph API basierend auf Team/Region versenden
+
+---
+
+## 📧 E-Mail-Format
+
+Jede E-Mail enthält:
+
+🏆 Rangliste des aktuellen Tages
+
+👥 Aktueller Tag nach Teams
+
+📅 Rangliste seit Monatsbeginn
+
+🗂️ Seit Monatsbeginn nach Teams
+
+📊 Rangliste seit Jahresbeginn
+
+📌 Seit Jahresbeginn nach Teams
+
+Die Tabellen enthalten Rahmen, zentrierten Text und hervorgehobene Überschriften, um die Lesbarkeit zu verbessern.
+
+---
+
+## ⏰ Hinweise
+
+Die Zeitstempel der E-Mails sind in UTC-4 angegeben und auf die nächste Stunde gerundet.
+
+Stellen Sie sicher, dass alle Geheimnisse und E-Mail-Empfänger richtig konfiguriert sind.
+
+Das Skript verwendet ein gemeinsames Postfach mit Empfängern in den Feldern „An“ und „CC“.
