@@ -11,7 +11,16 @@
 ## SQL Query's
 # Fetch hourly agent-level data
 Agents_df = spark.sql("""
-    SELECT Agent_No, Agent_Name, Team_No, Team_Name, Conversion, Orders, Gross_Revenue, Interactions, AOV
+    SELECT 
+        Agent_No, 
+        Agent_Name, 
+        Team_No, 
+        Team_Name, 
+        Conversion, 
+        Orders, 
+        Gross_Revenue, 
+        Interactions, 
+        AOV
     FROM main.reports.hourly.cc_report_current_day_hourly 
     ORDER BY Team_Name, Gross_Revenue DESC
 """).toPandas()
@@ -19,12 +28,15 @@ Agents_df = spark.sql("""
 # Fetch hourly team-level leaderboard
 leaderboard_df = spark.sql("""
     SELECT 
-        Team_No, Team_Name, Supervisor_Name, 
+        Team_No, 
+        Team_Name, 
+        Supervisor_Name, 
         CONCAT(ROUND(IFNULL(SUM(Orders) / SUM(Interactions), 0) * 100, 2), '%') AS Conversion, 
         SUM(Orders) AS Orders, 
         IFNULL(ROUND(SUM(Gross_Revenue), 2), 0) AS Gross_Revenue, 
         SUM(Interactions) AS Interactions, 
         ROUND(IFNULL(TRY_DIVIDE(SUM(Gross_Revenue), SUM(Orders)), 0), 2) AS AOV 
+        
     FROM main.reports.hourly.cc_report_current_day_hourly
     GROUP BY Team_No, Team_Name, Supervisor_Name
     ORDER BY Gross_Revenue DESC
@@ -83,7 +95,16 @@ def add_team_us_totals(df):
 # DBTITLE 1,Monthly
 # Fetch monthly agent-level data (MTD)
 MTD_Agents_df = spark.sql("""
-    SELECT Agent_No, Agent_Name, Team_No, Team_Name, Conversion, Orders, Gross_Revenue, Interactions, AOV
+    SELECT 
+        Agent_No,
+        Agent_Name, 
+        Team_No, 
+        Team_Name, 
+        Conversion, 
+        Orders, 
+        Gross_Revenue, 
+        Interactions, 
+        AOV
     FROM main.reports.hourly.cc_report_current_month_hourly
     ORDER BY Team_Name, Gross_Revenue DESC
 """).toPandas()
@@ -91,12 +112,14 @@ MTD_Agents_df = spark.sql("""
 # Fetch monthly team-level leaderboard (MTD)
 MTD_leaderboard_df = spark.sql("""
     SELECT 
-        Team_No, Team_Name, Supervisor_Name, 
+        Team_No, Team_Name, 
+        Supervisor_Name, 
         CONCAT(ROUND(IFNULL(SUM(Orders) / SUM(Interactions), 0) * 100, 2), '%') AS Conversion, 
         SUM(Orders) AS Orders, 
         IFNULL(ROUND(SUM(Gross_Revenue), 2), 0) AS Gross_Revenue, 
         SUM(Interactions) AS Interactions, 
         ROUND(IFNULL(TRY_DIVIDE(SUM(Gross_Revenue), SUM(Orders)), 0), 2) AS AOV 
+        
     FROM main.reports.hourly.cc_report_current_month_hourly
     GROUP BY Team_No, Team_Name, Supervisor_Name
     ORDER BY Gross_Revenue DESC
@@ -155,7 +178,11 @@ def add_MTD_team_us_totals(MTD_df):
 # DBTITLE 1,Yearly
 # Fetch yearly agent-level data (YTD)
 YTD_Agents_df = spark.sql("""
-    SELECT Agent_No, Agent_Name, Team_No, Team_Name,
+    SELECT 
+        Agent_No, 
+        Agent_Name, 
+        Team_No, 
+        Team_Name,
         CONCAT(ROUND(IFNULL(SUM(Orders) / SUM(Interactions), 0) * 100, 2), '%') AS Conversion, 
         SUM(Orders) AS Orders, 
         IFNULL(ROUND(SUM(Gross_Revenue), 2), 0) AS Gross_Revenue, 
@@ -175,6 +202,7 @@ YTD_leaderboard_df = spark.sql("""
         IFNULL(ROUND(SUM(Gross_Revenue), 2), 0) AS Gross_Revenue, 
         SUM(Interactions) AS Interactions, 
         ROUND(IFNULL(TRY_DIVIDE(SUM(Gross_Revenue), SUM(Orders)), 0), 2) AS AOV 
+        
     FROM main.reports.hourly.cc_report_current_Year_hourly
     GROUP BY Team_No, Team_Name, Supervisor_Name
     ORDER BY Gross_Revenue DESC
