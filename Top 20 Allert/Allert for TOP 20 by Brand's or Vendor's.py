@@ -1,3 +1,12 @@
+"""
+Example: Automated Daily Delta Table Comparison Report
+-----------------------------------------------------
+This notebook compares two versions of a Delta table, calculates percentage
+changes in price and cost, generates a summary by brand and vendor, exports
+the results to Excel, and sends an HTML report via Microsoft Graph API.
+
+All data sources, email addresses, and database names are anonymized.
+"""
 # Databricks notebook source
 # DBTITLE 1,Libraries
 # MAGIC %pip install bs4 xlsxwriter
@@ -723,10 +732,13 @@ def get_access_token(Example_client_id, Example_client_secret, Example_tenant_id
     url = f'https://login.microsoftonline.com/{Example_tenant_id}/oauth2/token'
     data = {
         'grant_type': 'client_example_credentials',
-        'client_id': Example_client_id,
-        'client_secret': Example_client_secret,
-        'scope': 'https://graph.microsoft.com/.default',
+        'client_id'= "<your_client_id_here>"
+	    'client_secret' = "<your_client_secret_here>"
+	    'tenant_id' = "<your_tenant_id_here>"
+	    'shared_mailbox_user_id' = "<demo_mailbox_id>"
     }
+# In demo mode, secrets are not retrieved from Databricks scope.
+# Replace these with your own credentials if testing email sending.
 
     response = requests.post(url, data=data)
     response.raise_for_status()
