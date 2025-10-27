@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Databricks](https://img.shields.io/badge/Databricks-SQL-orange)
+![Azure](https://img.shields.io/badge/Azure-KeyVault-blueviolet)
 
 ## **(ENG)** Englisch Version
 ---
@@ -29,17 +30,13 @@ Can send automated reports via Microsoft Graph API (OAuth2.0).
 
 # 📦 Tech Stack
 ---
-- Python 3.x
-
-- PySpark (pyspark.sql)
-
-- Pandas
-
-- XlsxWriter (Excel export)
-
-- BeautifulSoup (HTML table check)
-
-- Microsoft Graph API (email notifications)
+| Technology | Purpose |
+|------------|---------|
+| Databricks / Spark SQL | Data aggregation and transformation at scale |
+| Python (pandas, openpyxl) | Report generation and formatting |
+| Azure Key Vault (dbutils.secrets) | Secure secret management |
+| Microsoft Graph API | Automated email and report delivery |
+| SQL Views / Temporary Tables | Structured analytics logic |
 
 # 🧠 Example Output
 ---
@@ -115,17 +112,13 @@ Kann automatisierte Berichte über die Microsoft Graph API (OAuth2.0) versenden.
 
 # 📦 Tech Stack
 ---
-- Python 3.x
-
-- PySpark (pyspark.sql)
-
-- Pandas
-
-- XlsxWriter (Excel-Export)
-
-- BeautifulSoup (HTML-Tabellenprüfung)
-
-- Microsoft Graph API (E-Mail-Benachrichtigungen)
+| Technologie | Zweck |
+|------------|---------|
+| Databricks / Spark SQL | Datenaggregation und -transformation in großem Maßstab |
+| Python (pandas, openpyxl) | Berichterstellung und Formatierung |
+| Azure Key Vault (dbutils.secrets) | Sichere Verwaltung geheimer Daten |
+| Microsoft Graph API | Automatisierte E-Mail- und Berichtsübermittlung |
+| SQL-Ansichten/temporäre Tabellen | Strukturierte Analyselogik |
 
 # 🧠 Beispielausgabe
 ---
