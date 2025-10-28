@@ -178,7 +178,7 @@ spark.sql(
     """
 )
 
-# Create the list off Top 20 Brands for las 30 days by Gross revenue
+# Create the list off Top 100 Brands for las 30 days by Gross revenue
 Brand_top_df = spark.sql(
     """
     CREATE OR REPLACE TEMP VIEW Brand_top AS
@@ -194,12 +194,12 @@ Brand_top_df = spark.sql(
             AND sm.order_date >= current_date() - INTERVAL 30 DAY
         GROUP BY br.manufacturer_id, sm.brand
         ORDER BY Gross DESC
-        LIMIT 20
+        LIMIT 100
     )
     """
 ).toPandas()
 
-# Create the list off Top 20 Vendors for las 30 days by Gross revenue
+# Create the list off Top 100 Vendors for las 30 days by Gross revenue
 ## **In that case some of vendors have diferent names in different sources**
 
 Vendor_top_df = spark.sql(
@@ -215,7 +215,7 @@ Vendor_top_df = spark.sql(
             AND sm.order_date >= current_date() - INTERVAL 30 DAY
         GROUP BY ALL
         ORDER BY Gross DESC
-        LIMIT 20
+        LIMIT 100
     )
     """
 ).toPandas()
@@ -330,10 +330,10 @@ from pyspark.sql import functions as F
 from pyspark.sql.functions import col
 from IPython.display import display, HTML
 
-spark.sql(""" CREATE OR REPLACE TEMP VIEW Brand20 AS
+spark.sql(""" CREATE OR REPLACE TEMP VIEW Brand100 AS
  SELECT 
     bc.domain,
-    CASE WHEN bc.manufacturer_id IN (SELECT manufacturer_id FROM Brand_top) THEN "Yes" ELSE "No" END AS Top_20_brand,
+    CASE WHEN bc.manufacturer_id IN (SELECT manufacturer_id FROM Brand_top) THEN "Yes" ELSE "No" END AS Top_100_brand,
     bc.manufacturer_id AS id,
     bc.Brand,
     p.total_mpn,
@@ -378,14 +378,14 @@ spark.sql(""" CREATE OR REPLACE TEMP VIEW Brand20 AS
     ROUND(try_divide(SUM(bc.ship_price_mark), COUNT(DISTINCT bc.mpn)) * 100, 2) >= 5
 
   ORDER BY 
-    Top_20_brand Desc, bc.manufacturer_id;""").toPandas()
+    Top_100_brand Desc, bc.manufacturer_id;""").toPandas()
  
 # Check if the "Brand_changes" table is empty
 if spark.table("Brand_changes").count() == 0:
     print("The dataset is empty.")
 else:
     # Execute SQL query and convert the result to a Pandas DataFrame
-    top_brand_df = spark.sql("SELECT * FROM Brand20").toPandas()
+    top_brand_df = spark.sql("SELECT * FROM Brand100").toPandas()
 
     # Function to color values above 5% in red
     def color_above_5_percent(val):
@@ -398,8 +398,8 @@ else:
         except ValueError:
             return val  # Return the value unchanged if it cannot be converted to float
 
-    # Function to color 'Yes' in green in the 'Top_20_brand' column
-    def color_top_20_brand(val):
+    # Function to color 'Yes' in green in the 'Top_100_brand' column
+    def color_top_100_brand(val):
         if val == "Yes":
             return f'<span style="color:green">{val}</span>'
         else:
@@ -412,8 +412,8 @@ else:
     for column in columns_to_style:
         top_brand_df[column] = top_brand_df[column].apply(color_above_5_percent)
 
-    # Apply styling to the 'Top_20_brand' column
-    top_brand_df['Top_20_brand'] = top_brand_df['Top_20_brand'].apply(color_top_20_brand)
+    # Apply styling to the 'Top_100_brand' column
+    top_brand_df['Top_100_brand'] = top_brand_df['Top_100_brand'].apply(color_top_100_brand)
 
     # Create HTML for displaying the table with custom styles
     html_table_1 = """
@@ -449,7 +449,7 @@ else:
 top_brand_XLX_df = spark.sql(""" 
  SELECT 
     manufacturer_id,
-    CASE WHEN manufacturer_id IN (SELECT manufacturer_id FROM Brand_top) THEN "Yes" ELSE "No" END AS Top_20_brand,
+    CASE WHEN manufacturer_id IN (SELECT manufacturer_id FROM Brand_top) THEN "Yes" ELSE "No" END AS Top_100_brand,
     Brand,
     mpn,
     ptype_id,
@@ -473,7 +473,7 @@ top_brand_XLX_df = spark.sql("""
     previous_ship_price,
     ship_price_percentage_change, 
     OOS_mark
- FROM  inventory_changes WHERE manufacturer_id IN (SELECT id From Brand20)
+ FROM  inventory_changes WHERE manufacturer_id IN (SELECT id From Brand100)
  GROUP BY ALL
  HAVING 
     inventory_percentage_change != 0 OR
@@ -481,7 +481,7 @@ top_brand_XLX_df = spark.sql("""
     price_percentage_change != 0 OR
     ship_cost_percentage_change != 0 OR
     ship_price_percentage_change != 0
- ORDER BY Top_20_brand Desc, manufacturer_id
+ ORDER BY Top_100_brand Desc, manufacturer_id
     """).toPandas()
 
 new_data_attach_1 = top_brand_XLX_df
@@ -493,7 +493,7 @@ display (top_brand_XLX_df)
 average_brand_percentage_change_df = spark.sql("""
 SELECT
     manufacturer_id AS id,
-    CASE WHEN manufacturer_id IN (SELECT manufacturer_id FROM Brand_top) THEN "Yes" ELSE "No" END AS Top_20_brand,
+    CASE WHEN manufacturer_id IN (SELECT manufacturer_id FROM Brand_top) THEN "Yes" ELSE "No" END AS Top_100_brand,
     Brand,
     AVG(inventory_percentage_change) AS avg_inventory_percentage_change,
     AVG(cost_percentage_change) AS avg_cost_percentage_change,
@@ -502,11 +502,11 @@ SELECT
     AVG(ship_price_percentage_change) AS avg_ship_price_percentage_change
 FROM
     inventory_changes
-WHERE manufacturer_id IN (SELECT id From Brand20)
+WHERE manufacturer_id IN (SELECT id From Brand100)
 GROUP BY
     manufacturer_id, Brand
 ORDER BY
-    Top_20_brand Desc, manufacturer_id, Brand
+    Top_100_brand Desc, manufacturer_id, Brand
 """).toPandas()
 
 average_brand_percentage_change_df['avg_inventory_percentage_change'] = average_brand_percentage_change_df['avg_inventory_percentage_change'].map(lambda x: f"{x:.2f}%" if x is not None else "")
@@ -527,10 +527,10 @@ from pyspark.sql import functions as F
 from pyspark.sql.functions import col
 from IPython.display import display, HTML
 
-spark.sql(""" CREATE OR REPLACE TEMP VIEW Vendor20 AS
+spark.sql(""" CREATE OR REPLACE TEMP VIEW Vendor100 AS
   SELECT 
     vc.domain,
-    CASE WHEN vc.today_vendor_id IN (SELECT admin_id FROM Vendor_top) THEN "Yes" ELSE "No" END AS Top_20_Vendor,
+    CASE WHEN vc.today_vendor_id IN (SELECT admin_id FROM Vendor_top) THEN "Yes" ELSE "No" END AS Top_100_Vendor,
     vc.today_vendor_id AS id,
     vc.Current_vendor_Name,
     p.total_mpn,
@@ -576,14 +576,14 @@ spark.sql(""" CREATE OR REPLACE TEMP VIEW Vendor20 AS
     ROUND(try_divide(SUM(vc.ship_price_mark), COUNT(DISTINCT vc.mpn)) * 100, 2) >= 5
 
   ORDER BY 
-    Top_20_Vendor DESC,vc.today_vendor_id""").toPandas()
+    Top_100_Vendor DESC,vc.today_vendor_id""").toPandas()
 
 # Check if the "Vendor_changes" table is empty
 if spark.table("Vendor_changes").count() == 0:
     print("The dataset is empty.")
 else:
     # Execute SQL query and convert the result to a Pandas DataFrame
-    top_Vendor_df = spark.sql("SELECT * FROM Vendor20").toPandas()
+    top_Vendor_df = spark.sql("SELECT * FROM Vendor100").toPandas()
 
     # Function to color values above 5% in red
     def color_above_5_percent(val):
@@ -596,8 +596,8 @@ else:
         except ValueError:
             return val  # Return the value unchanged if it cannot be converted to float
 
-    # Function to color "Top_20_Vendor" as green if the value is "Yes"
-    def color_top_20_vendor(val):
+    # Function to color "Top_100_Vendor" as green if the value is "Yes"
+    def color_Top_100_vendor(val):
         if val == "Yes":
             return f'<span style="color:green">{val}</span>'
         else:
@@ -610,8 +610,8 @@ else:
     for column in columns_to_style:
         top_Vendor_df[column] = top_Vendor_df[column].apply(color_above_5_percent)
 
-    # Apply styling to the "Top_20_Vendor" column
-    top_Vendor_df['Top_20_Vendor'] = top_Vendor_df['Top_20_Vendor'].apply(color_top_20_vendor)
+    # Apply styling to the "Top_100_Vendor" column
+    top_Vendor_df['Top_100_Vendor'] = top_Vendor_df['Top_100_Vendor'].apply(color_Top_100_vendor)
 
     # Create HTML for displaying the table with custom styles
     html_table_2 = """
@@ -645,7 +645,7 @@ else:
 top_Vendor_XLX_df = spark.sql(""" 
  SELECT 
     today_vendor_id,
-    CASE WHEN today_vendor_id IN (SELECT admin_id FROM Vendor_top) THEN "Yes" ELSE "No" END AS Top_20_Vendor,
+    CASE WHEN today_vendor_id IN (SELECT admin_id FROM Vendor_top) THEN "Yes" ELSE "No" END AS Top_100_Vendor,
     Current_vendor_Name, 
     manufacturer_id,
     Brand,
@@ -669,7 +669,7 @@ top_Vendor_XLX_df = spark.sql("""
     previous_ship_price,
     ship_price_percentage_change, 
     OOS_mark
- FROM  inventory_changes WHERE today_vendor_id IN (SELECT id From Vendor20)
+ FROM  inventory_changes WHERE today_vendor_id IN (SELECT id From Vendor100)
  GROUP BY ALL
  HAVING 
     inventory_percentage_change != 0 OR
@@ -677,7 +677,7 @@ top_Vendor_XLX_df = spark.sql("""
     price_percentage_change != 0 OR
     ship_cost_percentage_change != 0 OR
     ship_price_percentage_change != 0
- ORDER BY Top_20_Vendor DESC, manufacturer_id
+ ORDER BY Top_100_Vendor DESC, manufacturer_id
     """).toPandas()
 
 
@@ -690,7 +690,7 @@ display (top_Vendor_XLX_df)
 average_vendor_percentage_change_df = spark.sql("""
 SELECT
     today_vendor_id AS id,
-    CASE WHEN today_vendor_id IN (SELECT admin_id FROM Vendor_top) THEN "Yes" ELSE "No" END AS Top_20_Vendor,
+    CASE WHEN today_vendor_id IN (SELECT admin_id FROM Vendor_top) THEN "Yes" ELSE "No" END AS Top_100_Vendor,
     Current_vendor_Name,
     AVG(inventory_percentage_change) AS avg_inventory_percentage_change,
     AVG(cost_percentage_change) AS avg_cost_percentage_change,
@@ -699,12 +699,12 @@ SELECT
     AVG(ship_price_percentage_change) AS avg_ship_price_percentage_change
 FROM
     inventory_changes
-WHERE today_vendor_id IN (SELECT id From Vendor20)
+WHERE today_vendor_id IN (SELECT id From Vendor100)
 GROUP BY
     today_vendor_id,
     Current_vendor_Name
 ORDER BY
-    Top_20_Vendor DESC,
+    Top_100_Vendor DESC,
     today_vendor_id,
     Current_vendor_Name
 """).toPandas()
