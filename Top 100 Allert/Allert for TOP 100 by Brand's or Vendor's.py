@@ -51,12 +51,12 @@ first_version = history_df.collect()[0]["version"]
 first_ship_version = history_ship_df.collect()[0]["version"]
 
 # Check if the difference is less than an hour (3600 seconds)
-if time_diff_product < 900:
+if time_diff_product < 3600:
     second_latest_version = history_df.collect()[2]["version"]  # Use third version if difference is less than 1 hour
 else:
     second_latest_version = history_df.collect()[1]["version"]  # Use second version if difference is more than 1 hour
 
-if time_diff_shipping < 900:
+if time_diff_shipping < 3600:
     second_latest_ship_version = history_ship_df.collect()[2]["version"]
 else:
     second_latest_ship_version = history_ship_df.collect()[1]["version"]
